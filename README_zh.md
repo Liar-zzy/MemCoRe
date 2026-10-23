@@ -9,10 +9,7 @@
     <a href="AGENTS.md"><img src="https://img.shields.io/badge/Agent-Guide-2ea44f" alt="Agent 使用指南"></a>
     <a href="CITATION.bib"><img src="https://img.shields.io/badge/Citation-BibTeX-8a2be2" alt="BibTeX 引用"></a>
     <a href="README.md"><img src="https://img.shields.io/badge/README-English-blue" alt="English README"></a>
-  </p>
-  <p>
     <a href="https://github.com/Liar-zzy/MemCoRe/stargazers"><img src="https://img.shields.io/github/stars/Liar-zzy/MemCoRe?style=social" alt="GitHub Stars"></a>
-    <a href="https://github.com/Liar-zzy/MemCoRe/issues"><img src="https://img.shields.io/github/issues/Liar-zzy/MemCoRe" alt="GitHub Issues"></a>
   </p>
 </div>
 
