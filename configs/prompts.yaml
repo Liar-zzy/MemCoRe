@@ -1,0 +1,11 @@
+# Prompt versions used by the Qwen3-8B reproduction.
+prompts:
+  c1c4: v0
+  c2: v0
+  c3: v0
+  c5: v0
+  subquery: v1
+  reflector: v0
+  query_intent: v0
+  analyze_content: v3
+  judgment: v3_gating

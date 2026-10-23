@@ -1,0 +1,20 @@
+# MemCoRe release: Qwen3-8B on all 10 LoCoMo conversations.
+# File paths are relative to this YAML file.
+schema_version: 1
+name: locomo_qwen3_8b
+dataset: ../data/locomo10.json
+llm_config_path: llm.yaml
+prompt_config_path: prompts.yaml
+output: ../results
+cache_dir: ../cached
+log_dir: ../logs
+graph_backend: inmemory
+retrieval_version: paper
+evidence_selection_version: legacy_rrf
+round_top_k: 60
+final_top_k: 60
+context_char_limit: 90000
+max_steps: 3
+metrics_mode: core_historical_v1
+seed: 42
+ratio: 1.0

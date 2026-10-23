@@ -1,0 +1,17 @@
+# OpenAI-compatible chat and embedding services. See README.md for serving commands.
+llm:
+  backend: openai
+  model: Qwen/Qwen3-8B
+  base_url: ${MEMCORE_LLM_BASE_URL:-http://127.0.0.1:8000/v1}
+  api_key: ${MEMCORE_LLM_API_KEY:-empty}
+  extra_body:
+    chat_template_kwargs:
+      enable_thinking: false
+    seed: 42
+    top_p: 1.0
+
+embedding:
+  backend: openai
+  model: Qwen/Qwen3-Embedding-0.6B
+  base_url: ${MEMCORE_EMBEDDING_BASE_URL:-http://127.0.0.1:8001/v1}
+  api_key: ${MEMCORE_EMBEDDING_API_KEY:-empty}

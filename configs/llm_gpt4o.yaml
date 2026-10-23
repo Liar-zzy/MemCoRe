@@ -1,0 +1,16 @@
+# GPT-4o chat API with the same Qwen embedding service used by the default run.
+# Keep Qwen/vLLM-only chat_template_kwargs out of OpenAI requests.
+llm:
+  backend: openai
+  model: gpt-4o
+  base_url: https://api.openai.com/v1
+  api_key: ${OPENAI_API_KEY}
+  extra_body:
+    seed: 42
+    top_p: 1.0
+
+embedding:
+  backend: openai
+  model: Qwen/Qwen3-Embedding-0.6B
+  base_url: ${MEMCORE_EMBEDDING_BASE_URL:-http://127.0.0.1:8001/v1}
+  api_key: ${MEMCORE_EMBEDDING_API_KEY:-empty}
