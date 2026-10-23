@@ -1,14 +1,13 @@
-# 🧠 MemCoRe
-
-**Recovering Evidence from Progressively Compressed Factual Knowledge for Agent Memory**
-
-<div align="left">
+<div align="center">
+  <h1>🧠 MemCoRe</h1>
+  <p><strong>Recovering Evidence from Progressively Compressed Factual Knowledge<br>for Agent Memory</strong></p>
+  <p>🎉 <strong>本工作已被 NeurIPS 2026 接收</strong></p>
   <p>
     <a href="https://arxiv.org/abs/2602.07885"><img src="https://img.shields.io/badge/arXiv-2602.07885-b31b1b" alt="论文：arXiv 2602.07885"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-007ec6" alt="许可证：MIT"></a>
-    <a href="AGENTS.md"><img src="https://img.shields.io/badge/Agent-Guide-2ea44f" alt="Agent 使用指南"></a>
-    <a href="CITATION.bib"><img src="https://img.shields.io/badge/Citation-BibTeX-8a2be2" alt="BibTeX 引用"></a>
-    <a href="README.md"><img src="https://img.shields.io/badge/README-English-blue" alt="English README"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-208b74" alt="许可证：MIT"></a>
+    <a href="AGENTS.md"><img src="https://img.shields.io/badge/Agent-Guide-208b74" alt="Agent 使用指南"></a>
+    <a href="CITATION.bib"><img src="https://img.shields.io/badge/Citation-BibTeX-208b74" alt="BibTeX 引用"></a>
+    <a href="README.md"><img src="https://img.shields.io/badge/README-English-208b74" alt="English README"></a>
     <a href="https://github.com/Liar-zzy/MemCoRe/stargazers"><img src="https://img.shields.io/github/stars/Liar-zzy/MemCoRe?style=social" alt="GitHub Stars"></a>
   </p>
 </div>
@@ -19,15 +18,11 @@ MemCoRe 将智能体记忆组织成 **Note、Keyword 和 Topic** 的层次结构
 
 ![MemCoRe 方法总览：记忆构建、压缩层次与记忆检索，取自论文 Figure 2](assets/memcore-overview.png)
 
-## 🗂️ 本次 release 的图存储
-
-原始实现使用 Neo4j。Community Edition 的一个 DBMS 实例只支持一个用户数据库，因此，多个需要独立图状态的实验需要额外处理应用层隔离，或部署多个实例。具体限制见 [Neo4j 官方文档](https://neo4j.com/docs/operations-manual/current/database-administration/)。
-
-为了简化部署、方便并行实验并支持后续算法扩展，本次 release 整理了轻量的进程内图实现：使用 NumPy 完成向量检索，使用 NetworkX/graspologic 完成图分析与 Topic 聚类。每段对话持有独立的图，可以通过 JSON 保存和恢复，便于管理图状态的隔离、重置与快照，无需额外部署数据库服务。
+<p align="center"><em>MemCoRe 方法总览：记忆构建、渐进压缩与证据检索。</em></p>
 
 ## 🚀 快速开始
 
-### 1. 安装依赖
+### 1. 📦 安装依赖
 
 使用已验证的 Python 3.11 环境：
 
@@ -42,7 +37,7 @@ python -m nltk.downloader punkt punkt_tab
 
 直接用 `python run.py` 运行，无需安装 MemCoRe 包。评测程序运行在 CPU 上，通过 API 调用聊天模型和 embedding 模型。
 
-### 2. 配置模型服务
+### 2. 🔌 配置模型服务
 
 启动模型服务后设置地址，以下也是默认值：
 
@@ -54,7 +49,7 @@ export MEMCORE_EMBEDDING_BASE_URL=http://127.0.0.1:8001/v1
 如需认证，设置 `MEMCORE_LLM_API_KEY` 和 `MEMCORE_EMBEDDING_API_KEY`。模型名称与生成参数在 [configs/llm.yaml](configs/llm.yaml) 中；默认关闭 Qwen3 的 thinking。
 
 <details>
-<summary>使用 vLLM 启动本地模型（两张 GPU）</summary>
+<summary>🖥️ 使用 vLLM 启动本地模型（两张 GPU）</summary>
 
 为模型服务创建独立环境：
 
@@ -99,7 +94,7 @@ CUDA_VISIBLE_DEVICES=1 python -m vllm.entrypoints.openai.api_server \
 </details>
 
 <details>
-<summary>切换到 Qwen3-14B 或 GPT-4o</summary>
+<summary>🔄 切换到 Qwen3-14B 或 GPT-4o</summary>
 
 使用 Qwen3-14B 时，将上方聊天服务命令中的两个模型名称都替换为 `Qwen/Qwen3-14B`，然后运行：
 
@@ -119,7 +114,7 @@ python run.py --llm-config-path configs/llm_gpt4o.yaml --name locomo_gpt4o
 
 </details>
 
-### 3. 先运行小样例
+### 3. 🧪 先运行小样例
 
 仓库附带六条对话、五个问题的合成样例，覆盖 LoCoMo 的五类问答：
 
@@ -130,7 +125,7 @@ python scripts/summarize.py results/demo
 
 这个命令会完成建图、检索、回答和评分。结果位于 `results/demo/`，图缓存位于 `cached/cached_mem_key_graph_v3/demo/`。
 
-### 4. 运行完整 LoCoMo
+### 4. 📊 运行完整 LoCoMo
 
 ```bash
 python scripts/download_data.py
@@ -147,6 +142,15 @@ python run.py --sample-indices 0 --name locomo_sample0
 ```
 
 中断后重新执行相同命令，会复用图缓存并接续已完成的问答。修改模型或实验参数时，换一个 `--name`。
+
+<details>
+<summary>🗂️ 图存储：为什么本次 release 不需要 Neo4j？</summary>
+
+原始实现使用 Neo4j。Community Edition 的一个 DBMS 实例只支持一个用户数据库，因此，多个需要独立图状态的实验需要额外处理应用层隔离，或部署多个实例。具体限制见 [Neo4j 官方文档](https://neo4j.com/docs/operations-manual/current/database-administration/)。
+
+为了简化部署、方便并行实验并支持后续算法扩展，本次 release 整理了轻量的进程内图实现：使用 NumPy 完成向量检索，使用 NetworkX/graspologic 完成图分析与 Topic 聚类。每段对话持有独立的图，可以通过 JSON 保存和恢复，便于管理图状态的隔离、重置与快照，无需额外部署数据库服务。
+
+</details>
 
 ## 📖 引用
 

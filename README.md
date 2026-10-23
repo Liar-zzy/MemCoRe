@@ -1,14 +1,13 @@
-# 🧠 MemCoRe
-
-**Recovering Evidence from Progressively Compressed Factual Knowledge for Agent Memory**
-
-<div align="left">
+<div align="center">
+  <h1>🧠 MemCoRe</h1>
+  <p><strong>Recovering Evidence from Progressively Compressed Factual Knowledge<br>for Agent Memory</strong></p>
+  <p>🎉 <strong>Accepted at NeurIPS 2026</strong></p>
   <p>
     <a href="https://arxiv.org/abs/2602.07885"><img src="https://img.shields.io/badge/arXiv-2602.07885-b31b1b" alt="arXiv: 2602.07885"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-007ec6" alt="License: MIT"></a>
-    <a href="AGENTS.md"><img src="https://img.shields.io/badge/Agent-Guide-2ea44f" alt="Agent guide"></a>
-    <a href="CITATION.bib"><img src="https://img.shields.io/badge/Citation-BibTeX-8a2be2" alt="Citation: BibTeX"></a>
-    <a href="README_zh.md"><img src="https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87-blue" alt="中文说明"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-208b74" alt="License: MIT"></a>
+    <a href="AGENTS.md"><img src="https://img.shields.io/badge/Agent-Guide-208b74" alt="Agent guide"></a>
+    <a href="CITATION.bib"><img src="https://img.shields.io/badge/Citation-BibTeX-208b74" alt="Citation: BibTeX"></a>
+    <a href="README_zh.md"><img src="https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87-208b74" alt="中文说明"></a>
     <a href="https://github.com/Liar-zzy/MemCoRe/stargazers"><img src="https://img.shields.io/github/stars/Liar-zzy/MemCoRe?style=social" alt="GitHub stars"></a>
   </p>
 </div>
@@ -19,15 +18,11 @@ This release provides the MemCoRe implementation and LoCoMo evaluation pipeline.
 
 ![MemCoRe framework: memory construction, compression hierarchy, and memory retrieval (Figure 2 in the paper)](assets/memcore-overview.png)
 
-## 🗂️ Graph storage in this release
-
-The original implementation used Neo4j. Community Edition supports one user database per DBMS instance, so experiments with independent graph states require application-level isolation or separate instances. See the [Neo4j documentation](https://neo4j.com/docs/operations-manual/current/database-administration/).
-
-To simplify deployment and support parallel experiments and future extensions, this release uses a lightweight in-process graph implementation: NumPy for vector search, and NetworkX/graspologic for graph analysis and topic clustering. Each conversation owns an independent graph that can be saved and restored as JSON. This makes graph isolation, resets, and snapshots easier to manage without an external database service.
+<p align="center"><em>Overview of MemCoRe: memory construction, progressive compression, and evidence retrieval.</em></p>
 
 ## 🚀 Quick start
 
-### 1. Install dependencies
+### 1. 📦 Install dependencies
 
 Use Python 3.11, which is the tested environment:
 
@@ -42,7 +37,7 @@ python -m nltk.downloader punkt punkt_tab
 
 Run the code directly with `python run.py`; MemCoRe itself does not need to be installed. The evaluator runs on CPU and calls separate chat and embedding services.
 
-### 2. Connect the models
+### 2. 🔌 Connect the models
 
 Connect your OpenAI-compatible chat and embedding endpoints:
 
@@ -54,7 +49,7 @@ export MEMCORE_EMBEDDING_BASE_URL=http://127.0.0.1:8001/v1
 The defaults already use these addresses. For authenticated services, set `MEMCORE_LLM_API_KEY` and `MEMCORE_EMBEDDING_API_KEY`. Model names and decoding options are in [configs/llm.yaml](configs/llm.yaml); Qwen3 thinking is disabled for this configuration.
 
 <details>
-<summary>Start local models with vLLM (two GPUs)</summary>
+<summary>🖥️ Start local models with vLLM (two GPUs)</summary>
 
 Create a separate environment for model serving:
 
@@ -99,7 +94,7 @@ Return to the evaluator environment and repository directory for the commands be
 </details>
 
 <details>
-<summary>Use Qwen3-14B or GPT-4o</summary>
+<summary>🔄 Use Qwen3-14B or GPT-4o</summary>
 
 For Qwen3-14B, replace both model names in the chat server command above with `Qwen/Qwen3-14B`, then run:
 
@@ -119,7 +114,7 @@ Both configurations keep **Qwen3-Embedding-0.6B** as a separate service. Changin
 
 </details>
 
-### 3. Run a small example
+### 3. 🧪 Run a small example
 
 The included example has six conversation turns and five questions covering all five LoCoMo categories:
 
@@ -130,7 +125,7 @@ python scripts/summarize.py results/demo
 
 This builds a graph, retrieves evidence, generates answers, and computes F1 and BLEU-1. Results are written to `results/demo/`, and the graph is saved under `cached/cached_mem_key_graph_v3/demo/`.
 
-### 4. Evaluate LoCoMo
+### 4. 📊 Evaluate LoCoMo
 
 Download the dataset from the [official LoCoMo repository](https://github.com/snap-research/locomo):
 
@@ -147,6 +142,15 @@ python run.py --sample-indices 0 --name locomo_sample0
 ```
 
 Run the same command again to resume an interrupted run. Use a new `--name` when changing models or experiment settings.
+
+<details>
+<summary>🗂️ Graph storage: why this release does not require Neo4j</summary>
+
+The original implementation used Neo4j. Community Edition supports one user database per DBMS instance, so experiments with independent graph states require application-level isolation or separate instances. See the [Neo4j documentation](https://neo4j.com/docs/operations-manual/current/database-administration/).
+
+To simplify deployment and support parallel experiments and future extensions, this release uses a lightweight in-process graph implementation: NumPy for vector search, and NetworkX/graspologic for graph analysis and topic clustering. Each conversation owns an independent graph that can be saved and restored as JSON. This makes graph isolation, resets, and snapshots easier to manage without an external database service.
+
+</details>
 
 ## 📖 Citation
 
