@@ -1,7 +1,6 @@
 <div align="center">
-  <h1>🧠 MemCoRe</h1>
+  <h1>🧠 MemCoRe（🎉 NeurIPS 2026）</h1>
   <p><strong>Recovering Evidence from Progressively Compressed Factual Knowledge<br>for Agent Memory</strong></p>
-  <p>🎉 <strong>Accepted at NeurIPS 2026</strong></p>
   <p>
     <a href="https://arxiv.org/abs/2602.07885"><img src="https://img.shields.io/badge/arXiv-2602.07885-b31b1b" alt="arXiv: 2602.07885"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-208b74" alt="License: MIT"></a>
